@@ -186,33 +186,13 @@
     /* AUDIT FORM */
     .audit-section{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
     .audit-inner{max-width:1100px;margin:0 auto;padding:clamp(64px,9vw,120px) clamp(20px,4vw,48px);display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
-    .audit-left{}
-    .audit-left .sub{margin-bottom:32px}
     .audit-bullets{display:flex;flex-direction:column;gap:14px}
     .audit-bullet{display:flex;align-items:flex-start;gap:12px;font-size:14px;color:var(--muted);line-height:1.6}
     .audit-bullet-icon{width:22px;height:22px;border-radius:50%;background:rgba(29,111,235,.12);border:1px solid rgba(29,111,235,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-size:11px;color:var(--violet)}
-    .audit-form{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:36px}
-    .form-title{font-family:'Outfit',sans-serif;font-size:20px;font-weight:700;margin-bottom:6px}
-    .form-sub{font-size:13px;color:var(--muted);margin-bottom:28px}
-    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
-    .form-group label{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.5px;text-transform:uppercase}
-    .form-group input,.form-group select,.form-group textarea{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:9px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;padding:12px 14px;width:100%;transition:border-color .2s,background .2s;outline:none;-webkit-appearance:none}
-    .form-group select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
-    .form-group select option{background:#0c0e18;color:var(--white)}
-    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--violet);background:rgba(29,111,235,.05)}
-    .form-group input::placeholder,.form-group textarea::placeholder{color:rgba(148,163,184,.5)}
-    .form-group textarea{resize:vertical;min-height:90px}
-    .form-submit{width:100%;background:var(--violet);color:#fff;border:none;border-radius:10px;padding:15px 24px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s,transform .2s;margin-top:4px}
-    .form-submit:hover{background:#1558d6;transform:translateY(-1px)}
-    .form-note{font-size:12px;color:var(--muted);text-align:center;margin-top:12px}
-    .form-success{display:none;text-align:center;padding:24px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:12px;color:#10b981;font-size:14px;font-weight:600;margin-top:16px}
+    .audit-form-wrap{background:var(--bg);border:1px solid var(--border);border-radius:20px;overflow:hidden}
+    .audit-form-wrap iframe{width:100%;min-height:720px;border:none;display:block}
     @media(max-width:900px){
       .audit-inner{grid-template-columns:1fr;gap:40px}
-    }
-    @media(max-width:480px){
-      .form-row{grid-template-columns:1fr}
-      .audit-form{padding:24px}
     }
 
   </style>
@@ -424,63 +404,13 @@
         <div class="audit-bullet"><div class="audit-bullet-icon">&#10003;</div>Social presence &amp; any other gaps we find</div>
       </div>
     </div>
-    <div class="audit-form rv" style="transition-delay:.1s">
-      <div class="form-title">Request Your Free Audit</div>
-      <div class="form-sub">Takes 2 minutes &middot; We'll have your report ready before the call</div>
-      <form id="audit-form" novalidate>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="af-first">First Name *</label>
-            <input type="text" id="af-first" name="first_name" placeholder="Jane" required autocomplete="given-name">
-          </div>
-          <div class="form-group">
-            <label for="af-last">Last Name *</label>
-            <input type="text" id="af-last" name="last_name" placeholder="Smith" required autocomplete="family-name">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="af-biz">Business Name *</label>
-          <input type="text" id="af-biz" name="company" placeholder="Glow MedSpa" required autocomplete="organization">
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="af-email">Email *</label>
-            <input type="email" id="af-email" name="email" placeholder="jane@glowmedspa.com" required autocomplete="email">
-          </div>
-          <div class="form-group">
-            <label for="af-phone">Phone *</label>
-            <input type="tel" id="af-phone" name="phone" placeholder="(555) 000-0000" required autocomplete="tel">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="af-web">Business Website</label>
-          <input type="url" id="af-web" name="website" placeholder="https://glowmedspa.com" autocomplete="url">
-        </div>
-        <div class="form-group">
-          <label for="af-gmb">Google Business Profile URL</label>
-          <input type="url" id="af-gmb" name="gmb" placeholder="https://maps.google.com/...">
-        </div>
-        <div class="form-group">
-          <label for="af-challenge">Biggest Challenge Right Now</label>
-          <select id="af-challenge" name="challenge">
-            <option value="" disabled selected>Select one...</option>
-            <option>Missed calls &amp; after-hours leads</option>
-            <option>Not enough Google reviews</option>
-            <option>No online booking system</option>
-            <option>Slow lead follow-up</option>
-            <option>No-shows &amp; empty slots</option>
-            <option>Losing past clients to competitors</option>
-            <option>All of the above</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="af-notes">Anything else we should know?</label>
-          <textarea id="af-notes" name="notes" placeholder="Current tools you use, how many locations, anything relevant..."></textarea>
-        </div>
-        <button type="submit" class="form-submit">Get My Free Audit &rarr;</button>
-        <p class="form-note">No spam. No pressure. Just a clear, honest audit.</p>
-        <div class="form-success" id="form-success">&#10003; Got it! Taking you to schedule your call now...</div>
-      </form>
+    <div class="audit-form-wrap rv" style="transition-delay:.1s">
+      <iframe
+        src="https://api.leadconnectorhq.com/widget/form/I2QSVOzPoITLorrBOGau"
+        title="Free Audit Request"
+        loading="lazy"
+        allow="cross-origin-isolated"
+      ></iframe>
     </div>
   </div>
 </div>
@@ -590,117 +520,12 @@
   });
 })();
 
-  // AUDIT FORM
-  document.getElementById('audit-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    var form = this;
-    var btn = form.querySelector('.form-submit');
-    var success = document.getElementById('form-success');
-
-    // Basic validation
-    var required = form.querySelectorAll('[required]');
-    var valid = true;
-    required.forEach(function(el) {
-      if (!el.value.trim()) {
-        el.style.borderColor = '#ef4444';
-        valid = false;
-        el.addEventListener('input', function(){ el.style.borderColor = ''; }, {once:true});
-      }
-    });
-    if (!valid) return;
-
-    btn.textContent = 'Submitting...';
-    btn.disabled = true;
-
-    var firstName = form.first_name.value.trim();
-    var lastName  = form.last_name.value.trim();
-    var email     = form.email.value.trim();
-    var phone     = form.phone.value.trim();
-    var company   = form.company.value.trim();
-    var website   = form.website.value.trim();
-    var challenge = form.challenge.value;
-    var notes     = form.notes.value.trim();
-
-    // Create contact in GHL so lead is captured even if they don't book
-    // Custom field IDs created via API for this location
-    var cfBiggestChallenge     = 'd0TpynHMhAwX6ehfE4cW';
-    var cfGoogleBusinessUrl    = 'VLFKN9obStkaMpbuN2cT';
-    var cfAuditNotes           = 'dOvoIewUWFvFQtuRa0zL';
-    var cfWebsite              = 'vVJNhUzOawpNtW5drKuS';
-
-    var gmb = form.gmb ? form.gmb.value.trim() : '';
-    var customFields = [];
-    if (challenge) customFields.push({ id: cfBiggestChallenge,  field_value: challenge });
-    if (gmb)       customFields.push({ id: cfGoogleBusinessUrl, field_value: gmb });
-    if (notes)     customFields.push({ id: cfAuditNotes,        field_value: notes });
-    if (website)   customFields.push({ id: cfWebsite,           field_value: website });
-
-    var contactPayload = {
-      firstName:    firstName,
-      lastName:     lastName,
-      email:        email,
-      phone:        phone,
-      companyName:  company,
-      source:       'Website Audit Form',
-      tags:         ['audit-request'],
-      locationId:   'Om0wXXKIyD8t6705v6Fb',
-      customFields: customFields
-    };
-
-    var bookingBase = 'https://brand.serviceascend.com/widget/bookings/serviceascend';
-
-    function redirectToBooking(contactId) {
-      var params = new URLSearchParams({
-        first_name: firstName,
-        last_name:  lastName,
-        email:      email,
-        phone:      phone
-      });
-      // Pass the GHL contact ID so the calendar links to the exact contact
-      // we just created (preserving all custom fields instead of creating a new one)
-      if (contactId) params.set('contact_id', contactId);
-      window.location.href = bookingBase + '?' + params.toString();
+  // Auto-resize GHL form iframe on message from GHL
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'hl_form_height') {
+      var iframe = document.querySelector('.audit-form-wrap iframe');
+      if (iframe) iframe.style.minHeight = (e.data.height + 40) + 'px';
     }
-
-    var GHL_TOKEN   = 'pit-5599c535-5b02-4d54-9f7d-864d20f71cd1';
-    var GHL_VERSION = '2021-07-28';
-    var GHL_HEADERS = {
-      'Content-Type':  'application/json',
-      'Authorization': 'Bearer ' + GHL_TOKEN,
-      'Version':       GHL_VERSION
-    };
-
-    fetch('https://services.leadconnectorhq.com/contacts/', {
-      method:  'POST',
-      headers: GHL_HEADERS,
-      body:    JSON.stringify(contactPayload)
-    })
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
-      var contactId = data && data.contact && data.contact.id;
-      // Create opportunity in pipeline so lead shows up immediately in "New Lead"
-      if (contactId) {
-        fetch('https://services.leadconnectorhq.com/opportunities/', {
-          method:  'POST',
-          headers: GHL_HEADERS,
-          body: JSON.stringify({
-            pipelineId:      'mLXouhWkrRTPSbQPUt5U',
-            pipelineStageId: '077eb81e-cb68-45b8-86cd-0449b72c4c6b',
-            locationId:      'Om0wXXKIyD8t6705v6Fb',
-            contactId:       contactId,
-            name:            (firstName + ' ' + lastName + ' - Audit Request'),
-            status:          'open'
-          })
-        }).catch(function() {});
-      }
-      success.style.display = 'block';
-      setTimeout(function() { redirectToBooking(contactId); }, 1500);
-    })
-    .catch(function() {
-      // API failed — still redirect so they can book, just without contactId
-      success.style.display = 'block';
-      setTimeout(function() { redirectToBooking(null); }, 1500);
-    });
   });
 
 </script>
