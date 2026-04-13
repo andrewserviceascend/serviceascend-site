@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Service Ascend builds AI-powered automation systems for medspas and service businesses. Automated booking, reviews, lead capture, and 24/7 follow-up. Done for you.">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta property="og:title" content="Service Ascend &mdash; AI Automation for Service Businesses">
+  <meta property="og:description" content="More bookings. More reviews. Zero extra work. Done for you.">
+  <meta property="og:type" content="website">
+  <title>Service Ascend &mdash; AI Automation for Service Businesses</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --bg:#04050a;
+      --surface:#0c0e18;
+      --border:rgba(255,255,255,0.07);
+      --violet:#1d6feb;
+      --cyan:#22c55e;
+      --green:#16a34a;
+      --white:#f8fafc;
+      --muted:#94a3b8;
+      --nav-h:76px;
+    }
+    html{scroll-behavior:smooth;background:var(--bg)}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--white);overflow-x:hidden;line-height:1.6;min-height:100vh}
+    a{color:inherit;text-decoration:none}
+    ul{list-style:none}
+    img{display:block;max-width:100%}
+
+    .skip{position:absolute;top:-100%;left:12px;background:var(--violet);color:#fff;padding:8px 18px;border-radius:0 0 8px 8px;font-weight:600;font-size:14px;z-index:9999;transition:top .2s}
+    .skip:focus{top:0}
+
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;width:100%;height:var(--nav-h);z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(4,5,10,0.95);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border);transition:background .3s}
+    .nav.solid{background:rgba(4,5,10,1)}
+    .nav-logo{height:48px}
+    .nav-links{display:flex;align-items:center;gap:36px}
+    .nav-links a{font-size:14px;font-weight:500;color:var(--muted);transition:color .2s;letter-spacing:.2px}
+    .nav-links a:hover{color:var(--white)}
+    .nav-cta{background:var(--violet);color:#fff!important;padding:10px 22px;border-radius:8px;font-weight:600!important;font-size:13px!important;transition:opacity .2s,transform .2s!important}
+    .nav-cta:hover{opacity:.88;transform:translateY(-1px)}
+    .hamburger{display:none;flex-direction:column;gap:5px;width:38px;height:38px;background:none;border:none;cursor:pointer;padding:7px;border-radius:6px}
+    .hamburger span{display:block;height:2px;background:var(--white);border-radius:2px;transition:transform .3s,opacity .3s}
+    .hamburger[aria-expanded=true] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .hamburger[aria-expanded=true] span:nth-child(2){opacity:0}
+    .hamburger[aria-expanded=true] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .mobile-nav{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(4,5,10,.98);border-bottom:1px solid var(--border);padding:20px 24px 28px;z-index:999;flex-direction:column;gap:4px}
+    .mobile-nav.open{display:flex}
+    .mobile-nav a{font-size:16px;font-weight:500;color:var(--muted);padding:12px 8px;border-radius:8px;transition:color .2s,background .2s}
+    .mobile-nav a:hover{color:var(--white);background:rgba(255,255,255,.04)}
+    .mobile-nav .m-cta{margin-top:10px;background:var(--violet);color:#fff!important;font-weight:600!important;text-align:center;border-radius:8px}
+
+    /* HERO */
+    .hero{min-height:100vh;display:grid;place-items:center;padding:calc(var(--nav-h) + 80px) 24px 80px;position:relative;overflow:hidden;text-align:center}
+    .hero-glow{position:absolute;inset:0;pointer-events:none}
+    .hero-glow::before{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(29,111,235,.1) 0%,transparent 70%);border-radius:50%}
+    .hero-glow::after{content:'';position:absolute;bottom:-10%;right:-10%;width:400px;height:400px;background:radial-gradient(ellipse,rgba(6,182,212,.06) 0%,transparent 65%);border-radius:50%}
+    .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(ellipse 80% 80% at 50% 0%,black 40%,transparent 100%)}
+    .hero-content{position:relative;z-index:2;max-width:860px}
+    .hero-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(29,111,235,.08);border:1px solid rgba(29,111,235,.2);color:#93c5fd;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:7px 18px;border-radius:50px;margin-bottom:36px}
+    .pill-dot{width:6px;height:6px;background:#60a5fa;border-radius:50%;animation:blink 2s infinite}
+    @keyframes blink{0%,100%{opacity:.4}50%{opacity:1}}
+    .hero h1{font-family:'Outfit',sans-serif;font-size:clamp(42px,7vw,82px);font-weight:800;line-height:1.0;letter-spacing:-1px;margin-bottom:28px;color:#fff;text-shadow:0 2px 40px rgba(4,5,10,.8)}
+    .hero h1 em{font-style:normal;background:linear-gradient(135deg,#60a5fa,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:clamp(16px,2vw,19px);color:#cbd5e1;line-height:1.75;max-width:560px;margin:0 auto 44px}
+    .hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+    /* BUTTONS */
+    .btn{display:inline-block;padding:14px 32px;border-radius:10px;font-weight:600;font-size:15px;transition:all .25s;cursor:pointer;border:none;white-space:nowrap;font-family:'DM Sans',sans-serif}
+    .btn-primary{background:var(--violet);color:#fff;box-shadow:0 0 0 0 rgba(29,111,235,.35)}
+    .btn-primary:hover{background:#1558d6;transform:translateY(-2px);box-shadow:0 8px 32px rgba(29,111,235,.35)}
+    .btn-outline{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.15)}
+    .btn-outline:hover{border-color:rgba(29,111,235,.4);background:rgba(29,111,235,.06)}
+    .btn-lg{padding:18px 42px;font-size:17px;border-radius:12px}
+    .btn-block{width:100%;text-align:center;display:block}
+
+    /* TICKER */
+    .ticker-wrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:20px 0;background:var(--surface)}
+    .ticker-track{display:flex;gap:56px;animation:tick 30s linear infinite;width:max-content}
+    @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .tick-item{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap;letter-spacing:.8px;text-transform:uppercase}
+    .tick-dot{width:5px;height:5px;background:var(--green);border-radius:50%;flex-shrink:0}
+
+    /* SECTIONS */
+    .section{padding:clamp(64px,9vw,120px) clamp(20px,4vw,48px);max-width:1200px;margin:0 auto}
+    .label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--violet);margin-bottom:14px}
+    .heading{font-family:'Outfit',sans-serif;font-size:clamp(30px,4.5vw,52px);font-weight:800;letter-spacing:-.5px;line-height:1.15;margin-bottom:16px}
+    .sub{font-size:17px;color:var(--muted);line-height:1.75;max-width:560px}
+
+    /* PROBLEMS */
+    .prob-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:52px}
+    .prob-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:30px;transition:border-color .3s,transform .3s}
+    .prob-card:hover{border-color:rgba(29,111,235,.3);transform:translateY(-3px)}
+    .prob-icon{width:44px;height:44px;border-radius:10px;background:rgba(29,111,235,.1);border:1px solid rgba(29,111,235,.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;font-family:'Outfit',sans-serif;letter-spacing:.5px;color:var(--violet);margin-bottom:18px}
+    .prob-card h3{font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;margin-bottom:8px}
+    .prob-card p{font-size:14px;color:var(--muted);line-height:1.7}
+
+    /* PROCESS */
+    .process-bg{background:var(--surface)}
+    .process-inner{max-width:1200px;margin:0 auto;padding:clamp(64px,9vw,120px) clamp(20px,4vw,48px)}
+    .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;margin-top:56px}
+    .step{padding:36px 28px;border-left:1px solid var(--border)}
+    .step:first-child{border-left:none}
+    .step-num{font-size:11px;font-weight:700;letter-spacing:3px;color:var(--violet);margin-bottom:14px;text-transform:uppercase}
+    .step h3{font-family:'Outfit',sans-serif;font-size:18px;font-weight:700;margin-bottom:10px}
+    .step p{font-size:14px;color:var(--muted);line-height:1.7}
+
+    /* PRICING */
+    .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;max-width:860px;margin:56px auto 0}
+    .pkg{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:40px 36px;position:relative;transition:transform .3s,box-shadow .3s}
+    .pkg:hover{transform:translateY(-5px);box-shadow:0 24px 60px rgba(0,0,0,.4)}
+    .pkg.featured{border-color:var(--violet);background:linear-gradient(160deg,rgba(29,111,235,.07),var(--surface))}
+    .pkg-badge{position:absolute;top:-11px;right:28px;background:linear-gradient(135deg,var(--violet),var(--green));color:#fff;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 14px;border-radius:6px}
+    .pkg-tier{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--violet);margin-bottom:8px}
+    .pkg-price{font-family:'Outfit',sans-serif;font-size:56px;font-weight:800;line-height:1;margin-bottom:4px;letter-spacing:-2px}
+    .pkg-price span{font-size:16px;color:var(--muted);font-weight:400;font-family:'DM Sans',sans-serif;letter-spacing:0}
+    .pkg-setup{font-size:13px;color:var(--muted);margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--border)}
+    .pkg-features{margin-bottom:32px}
+    .pkg-features li{font-size:14px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+    .pkg-features li::before{content:"\2713";color:var(--cyan);font-weight:700;font-size:12px;flex-shrink:0;margin-top:2px}
+
+    /* TRUST STRIP */
+    .trust{display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(20px,4vw,56px);padding:44px 24px;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .trust-item{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500}
+    .trust-icon{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--violet);flex-shrink:0}
+
+    /* FAQ */
+    .faq-list{max-width:700px;margin:52px auto 0;display:flex;flex-direction:column;gap:10px}
+    .faq-item{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .25s}
+    .faq-item:hover{border-color:rgba(29,111,235,.25)}
+    .faq-q{width:100%;background:none;border:none;color:var(--white);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;text-align:left;padding:20px 22px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;transition:color .2s}
+    .faq-q:hover{color:#93c5fd}
+    .faq-ch{color:var(--violet);font-size:22px;flex-shrink:0;transition:transform .3s;font-weight:300;line-height:1}
+    .faq-item.open .faq-ch{transform:rotate(45deg)}
+    .faq-a{font-size:14px;color:var(--muted);line-height:1.8;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;padding:0 22px}
+    .faq-item.open .faq-a{max-height:300px;padding:0 22px 20px}
+
+    /* CTA */
+    .cta-section{text-align:center;padding:clamp(80px,10vw,140px) 24px;position:relative;overflow:hidden}
+    .cta-glow{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(29,111,235,.1) 0%,transparent 65%);pointer-events:none}
+    .cta-inner{position:relative;z-index:2}
+    .cta-section h2{font-family:'Outfit',sans-serif;font-size:clamp(34px,5vw,60px);font-weight:800;letter-spacing:-.5px;line-height:1.1;margin-bottom:20px}
+    .cta-section h2 em{font-style:normal;background:linear-gradient(135deg,#60a5fa,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .cta-sub{font-size:17px;color:var(--muted);margin-bottom:40px;max-width:460px;margin-left:auto;margin-right:auto}
+    .cta-note{margin-top:16px;font-size:12px;color:var(--muted)}
+
+    /* FOOTER */
+    .footer{padding:48px 24px 36px;border-top:1px solid var(--border)}
+    .footer-inner{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:24px}
+    .footer-logo{height:44px}
+    .footer-links{display:flex;gap:24px;flex-wrap:wrap;justify-content:center}
+    .footer-links a{font-size:13px;color:var(--muted);transition:color .2s}
+    .footer-links a:hover{color:var(--white)}
+    .footer-copy{font-size:12px;color:var(--muted);text-align:center;line-height:1.8}
+    .footer-copy a{color:var(--cyan)}
+
+    /* REVEAL */
+    .rv,.rv-l,.rv-r{opacity:0;transition:opacity .7s ease,transform .7s ease}
+    .rv{transform:translateY(24px)}
+    .rv-l{transform:translateX(-36px)}
+    .rv-r{transform:translateX(36px)}
+    .rv.on,.rv-l.on,.rv-r.on{opacity:1;transform:translate(0)}
+
+    /* RESPONSIVE */
+    @media(max-width:768px){
+      .nav{padding:0 20px}
+      .nav-links{display:none}
+      .hamburger{display:flex}
+      .steps{grid-template-columns:1fr 1fr}
+      .step{border-left:none;border-top:1px solid var(--border)}
+      .step:first-child{border-top:none}
+      .pricing-grid{grid-template-columns:1fr}
+      .trust{gap:20px}
+    }
+    @media(max-width:480px){
+      .steps{grid-template-columns:1fr}
+      .hero-btns{flex-direction:column;align-items:center}
+      .btn{width:100%;text-align:center;max-width:300px}
+    }
+
+    /* AUDIT FORM */
+    .audit-section{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .audit-inner{max-width:1100px;margin:0 auto;padding:clamp(64px,9vw,120px) clamp(20px,4vw,48px);display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+    .audit-left{}
+    .audit-left .sub{margin-bottom:32px}
+    .audit-bullets{display:flex;flex-direction:column;gap:14px}
+    .audit-bullet{display:flex;align-items:flex-start;gap:12px;font-size:14px;color:var(--muted);line-height:1.6}
+    .audit-bullet-icon{width:22px;height:22px;border-radius:50%;background:rgba(29,111,235,.12);border:1px solid rgba(29,111,235,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-size:11px;color:var(--violet)}
+    .audit-form{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:36px}
+    .form-title{font-family:'Outfit',sans-serif;font-size:20px;font-weight:700;margin-bottom:6px}
+    .form-sub{font-size:13px;color:var(--muted);margin-bottom:28px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+    .form-group label{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.5px;text-transform:uppercase}
+    .form-group input,.form-group select,.form-group textarea{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:9px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;padding:12px 14px;width:100%;transition:border-color .2s,background .2s;outline:none;-webkit-appearance:none}
+    .form-group select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+    .form-group select option{background:#0c0e18;color:var(--white)}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--violet);background:rgba(29,111,235,.05)}
+    .form-group input::placeholder,.form-group textarea::placeholder{color:rgba(148,163,184,.5)}
+    .form-group textarea{resize:vertical;min-height:90px}
+    .form-submit{width:100%;background:var(--violet);color:#fff;border:none;border-radius:10px;padding:15px 24px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s,transform .2s;margin-top:4px}
+    .form-submit:hover{background:#1558d6;transform:translateY(-1px)}
+    .form-note{font-size:12px;color:var(--muted);text-align:center;margin-top:12px}
+    .form-success{display:none;text-align:center;padding:24px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:12px;color:#10b981;font-size:14px;font-weight:600;margin-top:16px}
+    @media(max-width:900px){
+      .audit-inner{grid-template-columns:1fr;gap:40px}
+    }
+    @media(max-width:480px){
+      .form-row{grid-template-columns:1fr}
+      .audit-form{padding:24px}
+    }
+
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip">Skip to content</a>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <img src="https://assets.cdn.filesafe.space/Om0wXXKIyD8t6705v6Fb/media/ef7cfd90-b20e-4cfa-88ef-436c2731e4b3.png" alt="Service Ascend" class="nav-logo" height="48">
+  <div class="nav-links">
+    <a href="#problems">Problems</a>
+    <a href="#process">How It Works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#audit">Free Audit</a>
+    <a href="#faq">FAQ</a>
+    <a href="#audit" class="nav-cta">Book Free Audit</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobile-nav">
+  <a href="#problems">Problems</a>
+  <a href="#process">How It Works</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#audit">Free Audit</a>
+  <a href="#faq">FAQ</a>
+  <a href="#audit" class="m-cta">Book Free Audit</a>
+</div>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-content">
+    <div class="hero-pill">
+      <span class="pill-dot"></span>
+      AI-Powered Growth &mdash; Medspas &amp; Service Businesses
+    </div>
+    <h1>More Bookings.<br>More Reviews.<br><em>Zero Extra Work.</em></h1>
+    <p class="hero-sub">We build automated systems that capture leads, book appointments, and grow your reviews 24/7 &mdash; while you focus on your clients.</p>
+    <div class="hero-btns">
+      <a href="#audit" class="btn btn-primary btn-lg">Get Your Free Audit &rarr;</a>
+      <a href="#pricing" class="btn btn-outline btn-lg">See Plans</a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="tick-item"><span class="tick-dot"></span>48-Hour Setup</span>
+    <span class="tick-item"><span class="tick-dot"></span>67% of Calls Unanswered After Hours</span>
+    <span class="tick-item"><span class="tick-dot"></span>No Long-Term Contracts</span>
+    <span class="tick-item"><span class="tick-dot"></span>5-Min Response = 400% More Conversions</span>
+    <span class="tick-item"><span class="tick-dot"></span>Cancel Anytime</span>
+    <span class="tick-item"><span class="tick-dot"></span>83% Check Reviews Before Booking</span>
+    <span class="tick-item"><span class="tick-dot"></span>Live in 48 Hours or Less</span>
+    <span class="tick-item"><span class="tick-dot"></span>48-Hour Setup</span>
+    <span class="tick-item"><span class="tick-dot"></span>67% of Calls Unanswered After Hours</span>
+    <span class="tick-item"><span class="tick-dot"></span>No Long-Term Contracts</span>
+    <span class="tick-item"><span class="tick-dot"></span>5-Min Response = 400% More Conversions</span>
+    <span class="tick-item"><span class="tick-dot"></span>Cancel Anytime</span>
+    <span class="tick-item"><span class="tick-dot"></span>83% Check Reviews Before Booking</span>
+    <span class="tick-item"><span class="tick-dot"></span>Live in 48 Hours or Less</span>
+  </div>
+</div>
+
+<!-- PROBLEMS -->
+<section id="problems" class="section">
+  <div class="label rv">The Problem</div>
+  <h2 class="heading rv">Your business is leaking revenue.<br>Here&rsquo;s exactly where.</h2>
+  <p class="sub rv">Most service businesses lose 30&ndash;50% of potential revenue to gaps they don&rsquo;t even see.</p>
+  <div class="prob-grid">
+    <article class="prob-card rv" style="transition-delay:.05s">
+      <div class="prob-icon">01</div>
+      <h3>Missed Calls = Missed Revenue</h3>
+      <p>Someone calls at 6pm to book a facial. It rings out. They call your competitor. That&rsquo;s $200+ gone forever.</p>
+    </article>
+    <article class="prob-card rv" style="transition-delay:.1s">
+      <div class="prob-icon">02</div>
+      <h3>Leads Go Cold Fast</h3>
+      <p>A lead fills out your form. You reply 3 days later. They&rsquo;ve already booked elsewhere. Speed is everything.</p>
+    </article>
+    <article class="prob-card rv" style="transition-delay:.15s">
+      <div class="prob-icon">03</div>
+      <h3>Too Few Reviews</h3>
+      <p>You have 14 Google reviews. Your competitor has 200. New clients pick them before they even call you.</p>
+    </article>
+    <article class="prob-card rv" style="transition-delay:.2s">
+      <div class="prob-icon">04</div>
+      <h3>No-Shows Kill Your Schedule</h3>
+      <p>Without automated reminders and rebooking, cancellations empty your calendar and cost you thousands monthly.</p>
+    </article>
+    <article class="prob-card rv" style="transition-delay:.25s">
+      <div class="prob-icon">05</div>
+      <h3>No Online Booking</h3>
+      <p>If clients can&rsquo;t book at 11pm from their couch, you&rsquo;re invisible to a huge segment of potential clients.</p>
+    </article>
+    <article class="prob-card rv" style="transition-delay:.3s">
+      <div class="prob-icon">06</div>
+      <h3>Past Clients Forgotten</h3>
+      <p>Your easiest revenue is people who&rsquo;ve already visited. Without reactivation campaigns, they drift away.</p>
+    </article>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<div class="process-bg" id="process">
+  <div class="process-inner">
+    <div class="label rv">How It Works</div>
+    <h2 class="heading rv">A done-for-you system,<br>built around your business.</h2>
+    <p class="sub rv">We handle every detail. You approve, we build, your business grows.</p>
+    <div class="steps">
+      <div class="step rv" style="transition-delay:.05s">
+        <div class="step-num">Step 01</div>
+        <h3>Free Audit</h3>
+        <p>We analyze your online presence, reviews, booking flow, and after-hours response. You get a clear report of what&rsquo;s costing you clients.</p>
+      </div>
+      <div class="step rv" style="transition-delay:.1s">
+        <div class="step-num">Step 02</div>
+        <h3>We Build Everything</h3>
+        <p>Website, booking calendar, automations, AI tools &mdash; all built specifically for your business. You don&rsquo;t lift a finger.</p>
+      </div>
+      <div class="step rv" style="transition-delay:.15s">
+        <div class="step-num">Step 03</div>
+        <h3>Go Live</h3>
+        <p>Your system launches. Leads get instant responses, reviews accumulate automatically, and your dashboard shows everything in real time.</p>
+      </div>
+      <div class="step rv" style="transition-delay:.2s">
+        <div class="step-num">Step 04</div>
+        <h3>We Optimize</h3>
+        <p>We continuously refine your campaigns, test what converts best, and scale what works. You stay focused on great service.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<section id="pricing" class="section" style="text-align:center">
+  <div class="label rv">Pricing</div>
+  <h2 class="heading rv" style="max-width:600px;margin:0 auto 14px">Plans that pay for themselves<br>in the first week.</h2>
+  <p class="sub rv" style="max-width:500px;margin:0 auto">No contracts. No hidden fees. Cancel anytime.</p>
+  <div class="pricing-grid">
+    <article class="pkg rv-l" aria-labelledby="starter-h">
+      <div class="pkg-tier">Starter</div>
+      <div class="pkg-price" id="starter-h">$297<span>/mo</span></div>
+      <div class="pkg-setup">+ $497 one-time setup fee</div>
+      <ul class="pkg-features">
+        <li>Professional 1&ndash;3 page website</li>
+        <li>Online booking calendar</li>
+        <li>Automated appointment reminders (SMS + email)</li>
+        <li>Google review request automation</li>
+        <li>Missed-call text-back</li>
+        <li>AI chatbot for lead capture</li>
+        <li>Your own business dashboard</li>
+      </ul>
+      <a href="https://brand.serviceascend.com/payment-link/69d952d780425dc02fbc6eef" class="btn btn-outline btn-block" rel="noopener">Get Started &rarr;</a>
+    </article>
+    <article class="pkg featured rv-r" aria-labelledby="growth-h">
+      <div class="pkg-badge">Most Popular</div>
+      <div class="pkg-tier">Growth</div>
+      <div class="pkg-price" id="growth-h">$697<span>/mo</span></div>
+      <div class="pkg-setup">+ $997 one-time setup fee</div>
+      <ul class="pkg-features">
+        <li>Everything in Starter</li>
+        <li>AI voice receptionist (24/7 call handling)</li>
+        <li>Multi-step lead nurture sequences</li>
+        <li>Past client reactivation campaigns</li>
+        <li>Automated no-show rebooking</li>
+        <li>Birthday &amp; anniversary offers</li>
+        <li>Review alerts with AI response suggestions</li>
+        <li>Monthly performance report (automated)</li>
+        <li>2 optimization requests per month</li>
+      </ul>
+      <a href="https://brand.serviceascend.com/payment-link/69d952a480425dc02fbc6eee" class="btn btn-primary btn-block" rel="noopener">Get Started &rarr;</a>
+    </article>
+  </div>
+</section>
+
+<!-- TRUST -->
+<div class="trust rv">
+  <div class="trust-item"><span class="trust-icon"></span> Fast, professional setup</div>
+  <div class="trust-item"><span class="trust-icon"></span> No long-term contracts</div>
+  <div class="trust-item"><span class="trust-icon"></span> Cancel anytime</div>
+  <div class="trust-item"><span class="trust-icon"></span> No hidden fees &mdash; ever</div>
+</div>
+
+
+
+<!-- AUDIT FORM -->
+<div class="audit-section" id="audit">
+  <div class="audit-inner">
+    <div class="audit-left rv">
+      <div class="label" style="margin-bottom:14px">Free Audit</div>
+      <h2 class="heading" style="margin-bottom:16px">Find out exactly where you're losing clients.</h2>
+      <p class="sub" style="margin-bottom:32px">Fill out the form and we'll run a full audit of your online presence before we talk. No fluff &mdash; just a clear picture of what's costing you revenue.</p>
+      <div class="audit-bullets">
+        <div class="audit-bullet"><div class="audit-bullet-icon">&#10003;</div>Google review count vs. your top competitors</div>
+        <div class="audit-bullet"><div class="audit-bullet-icon">&#10003;</div>Website booking accessibility (mobile + desktop)</div>
+        <div class="audit-bullet"><div class="audit-bullet-icon">&#10003;</div>After-hours call &amp; response test</div>
+        <div class="audit-bullet"><div class="audit-bullet-icon">&#10003;</div>Online booking availability check</div>
+        <div class="audit-bullet"><div class="audit-bullet-icon">&#10003;</div>Social presence &amp; any other gaps we find</div>
+      </div>
+    </div>
+    <div class="audit-form rv" style="transition-delay:.1s">
+      <div class="form-title">Request Your Free Audit</div>
+      <div class="form-sub">Takes 2 minutes &middot; We'll have your report ready before the call</div>
+      <form id="audit-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="af-first">First Name *</label>
+            <input type="text" id="af-first" name="first_name" placeholder="Jane" required autocomplete="given-name">
+          </div>
+          <div class="form-group">
+            <label for="af-last">Last Name *</label>
+            <input type="text" id="af-last" name="last_name" placeholder="Smith" required autocomplete="family-name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="af-biz">Business Name *</label>
+          <input type="text" id="af-biz" name="company" placeholder="Glow MedSpa" required autocomplete="organization">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="af-email">Email *</label>
+            <input type="email" id="af-email" name="email" placeholder="jane@glowmedspa.com" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="af-phone">Phone *</label>
+            <input type="tel" id="af-phone" name="phone" placeholder="(555) 000-0000" required autocomplete="tel">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="af-web">Business Website</label>
+          <input type="url" id="af-web" name="website" placeholder="https://glowmedspa.com" autocomplete="url">
+        </div>
+        <div class="form-group">
+          <label for="af-gmb">Google Business Profile URL</label>
+          <input type="url" id="af-gmb" name="gmb" placeholder="https://maps.google.com/...">
+        </div>
+        <div class="form-group">
+          <label for="af-challenge">Biggest Challenge Right Now</label>
+          <select id="af-challenge" name="challenge">
+            <option value="" disabled selected>Select one...</option>
+            <option>Missed calls &amp; after-hours leads</option>
+            <option>Not enough Google reviews</option>
+            <option>No online booking system</option>
+            <option>Slow lead follow-up</option>
+            <option>No-shows &amp; empty slots</option>
+            <option>Losing past clients to competitors</option>
+            <option>All of the above</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="af-notes">Anything else we should know?</label>
+          <textarea id="af-notes" name="notes" placeholder="Current tools you use, how many locations, anything relevant..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Get My Free Audit &rarr;</button>
+        <p class="form-note">No spam. No pressure. Just a clear, honest audit.</p>
+        <div class="form-success" id="form-success">&#10003; Got it! Taking you to schedule your call now...</div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section id="faq" class="section" style="text-align:center">
+  <div class="label rv">FAQ</div>
+  <h2 class="heading rv" style="max-width:480px;margin:0 auto 0">Common questions</h2>
+  <div class="faq-list">
+    <div class="faq-item rv" style="transition-delay:.05s">
+      <button class="faq-q" aria-expanded="false">What happens after I sign up?<span class="faq-ch">+</span></button>
+      <div class="faq-a">We reach out within hours to collect your business details. From there, we build everything out in your dedicated dashboard and get your system live as quickly as possible. You&rsquo;ll do a quick 20-minute walkthrough with us before going live.</div>
+    </div>
+    <div class="faq-item rv" style="transition-delay:.1s">
+      <button class="faq-q" aria-expanded="false">Do I need any technical knowledge?<span class="faq-ch">+</span></button>
+      <div class="faq-a">None at all. We handle every bit of setup. You get login credentials to your own dashboard so you can see what&rsquo;s happening &mdash; leads, bookings, reviews &mdash; but you never need to touch the technical side.</div>
+    </div>
+    <div class="faq-item rv" style="transition-delay:.15s">
+      <button class="faq-q" aria-expanded="false">How quickly will I see results?<span class="faq-ch">+</span></button>
+      <div class="faq-a">Most clients see their first automated leads and review requests within days of going live. Results compound over time &mdash; most see clear ROI within 30 days.</div>
+    </div>
+    <div class="faq-item rv" style="transition-delay:.2s">
+      <button class="faq-q" aria-expanded="false">Can I cancel anytime?<span class="faq-ch">+</span></button>
+      <div class="faq-a">Yes &mdash; no long-term contracts. You pay month-to-month and can cancel with 30 days&rsquo; notice. The one-time setup fee is non-refundable as it covers the work done to build your system.</div>
+    </div>
+    <div class="faq-item rv" style="transition-delay:.25s">
+      <button class="faq-q" aria-expanded="false">What if I&rsquo;m already using another tool?<span class="faq-ch">+</span></button>
+      <div class="faq-a">We can often integrate with what you already use. Mention it on your audit call and we&rsquo;ll advise the best path. In most cases our system replaces multiple tools at lower total cost.</div>
+    </div>
+    <div class="faq-item rv" style="transition-delay:.3s">
+      <button class="faq-q" aria-expanded="false">Is this only for medspas?<span class="faq-ch">+</span></button>
+      <div class="faq-a">We specialize in medspas but work with any appointment-based service business &mdash; dental, chiropractic, cosmetic clinics, salons, and more.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="book">
+  <div class="cta-glow" aria-hidden="true"></div>
+  <div class="cta-inner">
+    <div class="label" style="margin-bottom:20px">Get Started</div>
+    <h2>Ready to stop<br><em>losing clients?</em></h2>
+    <p class="cta-sub">Get a free audit of your online presence. We&rsquo;ll show you exactly where you&rsquo;re leaking revenue &mdash; no obligation.</p>
+    <a href="#audit" class="btn btn-primary btn-lg">Book Your Free Audit &rarr;</a>
+    <p class="cta-note">15-minute call &middot; No obligation &middot; No sales pressure</p>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <img src="https://assets.cdn.filesafe.space/Om0wXXKIyD8t6705v6Fb/media/ef7cfd90-b20e-4cfa-88ef-436c2731e4b3.png" alt="Service Ascend" class="footer-logo" height="44">
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="#problems">Problems</a>
+      <a href="#process">Process</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#audit">Book a Call</a>
+    </nav>
+    <p class="footer-copy">
+      &copy; 2026 Service Ascend. All rights reserved.<br>
+      <a href="mailto:andrew@serviceascend.com">andrew@serviceascend.com</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function(){ nav.classList.toggle('solid', window.scrollY > 20); }, {passive:true});
+
+  var ham = document.getElementById('hamburger');
+  var mNav = document.getElementById('mobile-nav');
+  ham.addEventListener('click', function(){
+    var open = mNav.classList.toggle('open');
+    ham.setAttribute('aria-expanded', open ? 'true' : 'false');
+    ham.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  mNav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      mNav.classList.remove('open');
+      ham.setAttribute('aria-expanded', 'false');
+      ham.setAttribute('aria-label', 'Open menu');
+    });
+  });
+  document.addEventListener('click', function(e){
+    if (!nav.contains(e.target) && !mNav.contains(e.target)){
+      mNav.classList.remove('open');
+      ham.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); } });
+  }, {threshold:0.08, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(function(el){ obs.observe(el); });
+
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.closest('.faq-item');
+      var open = item.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+})();
+
+  // AUDIT FORM
+  document.getElementById('audit-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var form = this;
+    var btn = form.querySelector('.form-submit');
+    var success = document.getElementById('form-success');
+
+    // Basic validation
+    var required = form.querySelectorAll('[required]');
+    var valid = true;
+    required.forEach(function(el) {
+      if (!el.value.trim()) {
+        el.style.borderColor = '#ef4444';
+        valid = false;
+        el.addEventListener('input', function(){ el.style.borderColor = ''; }, {once:true});
+      }
+    });
+    if (!valid) return;
+
+    btn.textContent = 'Submitting...';
+    btn.disabled = true;
+
+    var firstName = form.first_name.value.trim();
+    var lastName  = form.last_name.value.trim();
+    var email     = form.email.value.trim();
+    var phone     = form.phone.value.trim();
+    var company   = form.company.value.trim();
+    var website   = form.website.value.trim();
+    var challenge = form.challenge.value;
+    var notes     = form.notes.value.trim();
+
+    // Create contact in GHL so lead is captured even if they don't book
+    // Custom field IDs created via API for this location
+    var cfBiggestChallenge     = 'd0TpynHMhAwX6ehfE4cW';
+    var cfGoogleBusinessUrl    = 'VLFKN9obStkaMpbuN2cT';
+    var cfAuditNotes           = 'dOvoIewUWFvFQtuRa0zL';
+    var cfWebsite              = 'vVJNhUzOawpNtW5drKuS';
+
+    var gmb = form.gmb ? form.gmb.value.trim() : '';
+    var customFields = [];
+    if (challenge) customFields.push({ id: cfBiggestChallenge,  field_value: challenge });
+    if (gmb)       customFields.push({ id: cfGoogleBusinessUrl, field_value: gmb });
+    if (notes)     customFields.push({ id: cfAuditNotes,        field_value: notes });
+    if (website)   customFields.push({ id: cfWebsite,           field_value: website });
+
+    var contactPayload = {
+      firstName:    firstName,
+      lastName:     lastName,
+      email:        email,
+      phone:        phone,
+      companyName:  company,
+      source:       'Website Audit Form',
+      tags:         ['audit-request'],
+      locationId:   'Om0wXXKIyD8t6705v6Fb',
+      customFields: customFields
+    };
+
+    var bookingBase = 'https://brand.serviceascend.com/widget/bookings/serviceascend';
+
+    function redirectToBooking(contactId) {
+      var params = new URLSearchParams({
+        first_name: firstName,
+        last_name:  lastName,
+        email:      email,
+        phone:      phone
+      });
+      // Pass the GHL contact ID so the calendar links to the exact contact
+      // we just created (preserving all custom fields instead of creating a new one)
+      if (contactId) params.set('contact_id', contactId);
+      window.location.href = bookingBase + '?' + params.toString();
+    }
+
+    var GHL_TOKEN   = 'pit-5599c535-5b02-4d54-9f7d-864d20f71cd1';
+    var GHL_VERSION = '2021-07-28';
+    var GHL_HEADERS = {
+      'Content-Type':  'application/json',
+      'Authorization': 'Bearer ' + GHL_TOKEN,
+      'Version':       GHL_VERSION
+    };
+
+    fetch('https://services.leadconnectorhq.com/contacts/', {
+      method:  'POST',
+      headers: GHL_HEADERS,
+      body:    JSON.stringify(contactPayload)
+    })
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      var contactId = data && data.contact && data.contact.id;
+      // Create opportunity in pipeline so lead shows up immediately in "New Lead"
+      if (contactId) {
+        fetch('https://services.leadconnectorhq.com/opportunities/', {
+          method:  'POST',
+          headers: GHL_HEADERS,
+          body: JSON.stringify({
+            pipelineId:      'mLXouhWkrRTPSbQPUt5U',
+            pipelineStageId: '077eb81e-cb68-45b8-86cd-0449b72c4c6b',
+            locationId:      'Om0wXXKIyD8t6705v6Fb',
+            contactId:       contactId,
+            name:            (firstName + ' ' + lastName + ' - Audit Request'),
+            status:          'open'
+          })
+        }).catch(function() {});
+      }
+      success.style.display = 'block';
+      setTimeout(function() { redirectToBooking(contactId); }, 1500);
+    })
+    .catch(function() {
+      // API failed — still redirect so they can book, just without contactId
+      success.style.display = 'block';
+      setTimeout(function() { redirectToBooking(null); }, 1500);
+    });
+  });
+
+</script>
+</body>
+</html>
